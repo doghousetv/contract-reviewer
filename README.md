@@ -1,6 +1,6 @@
 # Patchbay Contract Reviewer
 
-A React-based web application designed to streamline music industry contract management; built as part of Patchbay's contract parsing service. It enables users to upload contract documents (PDF/DOCX), leverages AI to automatically extract key terms (like deal type, artist name, and fee amounts), and provides an intuitive interface for reviewing and editing contract details before saving. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application designed to streamline music industry contract management. It enables users to upload contract documents (PDF/DOCX), leverages AI to automatically extract key terms (like deal type, artist name, and fee amounts), and provides an intuitive interface for reviewing and editing contract details before saving. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Getting Started
 
