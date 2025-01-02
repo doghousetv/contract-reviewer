@@ -129,7 +129,7 @@ const ContractForm = ({ data, onRetry }: Props) => {
           {isEditing ? (
             <select
               {...register("work_for_hire", {
-                setValueAs: (value) => value === 'true'
+                setValueAs: (value) => value === true
               })}
               className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
             >
