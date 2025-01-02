@@ -2,9 +2,9 @@
 
 A React-based web application designed to streamline music industry contract management. It enables users to upload contract documents (PDF/DOCX), leverages AI to automatically extract key terms (like deal type, artist name, and fee amounts), and provides an intuitive interface for reviewing and editing contract details before saving. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[Demo Video](https://youtu.be/lZW4HeVaF3s)
-
 > **Note**: AI assistance was used during development for debugging peer dependencies and creating the read-only/edit state of the ContractForm component.
+
+[Demo Video](https://youtu.be/lZW4HeVaF3s)
 
 ## Getting Started
 
