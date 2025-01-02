@@ -9,21 +9,25 @@ interface Props {
 
 const ContractForm = ({ data, onRetry }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
-  const { register, handleSubmit, watch } = useForm<ContractData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<ContractData>({
     defaultValues: {
       ...data,
       work_for_hire: data.work_for_hire as boolean
-    }
+    },
+    mode: 'onBlur'
   });
 
   // Watch all form values to display them in read-only mode
   const contract = watch();
 
   const onFormSubmit = (formData: ContractData) => {
-    setIsEditing(false);
-
-    // Mock API call
-    console.log('Saving contract:', formData);
+    try {
+      setIsEditing(false);
+      // Mock API call
+      console.log('Saving contract:', formData);
+    } catch (error) {
+      console.error('Error saving contract:', error);
+    }
   };
 
   return (
@@ -44,7 +48,9 @@ const ContractForm = ({ data, onRetry }: Props) => {
           <p className="text-gray-400">Deal Type</p>
           {isEditing ? (
             <select 
-              {...register("type")}
+              {...register("type", { 
+                required: "Deal type is required" 
+              })}
               className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
             >
               <option value="Producer">Producer</option>
@@ -59,10 +65,18 @@ const ContractForm = ({ data, onRetry }: Props) => {
         <div>
           <p className="text-gray-400">Artist Name</p>
           {isEditing ? (
-            <input
-              {...register("artist")}
-              className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
-            />
+            <div>
+              <input
+                {...register("artist", {
+                  required: "Artist name is required",
+                  minLength: { value: 2, message: "Artist name must be at least 2 characters" }
+                })}
+                className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
+              />
+              {errors.artist && (
+                <p className="text-red-500 text-sm mt-1">{errors.artist.message}</p>
+              )}
+            </div>
           ) : (
             <p className="text-white text-lg">{contract.artist}</p>
           )}
@@ -71,11 +85,20 @@ const ContractForm = ({ data, onRetry }: Props) => {
         <div>
           <p className="text-gray-400">Fee Amount</p>
           {isEditing ? (
-            <input
-              type="number"
-              {...register("fee_amount", { valueAsNumber: true })}
-              className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
-            />
+            <div>
+              <input
+                type="number"
+                {...register("fee_amount", {
+                  required: "Fee amount is required",
+                  valueAsNumber: true,
+                  min: { value: 0, message: "Fee amount must be positive" }
+                })}
+                className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
+              />
+              {errors.fee_amount && (
+                <p className="text-red-500 text-sm mt-1">{errors.fee_amount.message}</p>
+              )}
+            </div>
           ) : (
             <p className="text-white text-lg">${contract.fee_amount?.toLocaleString()}</p>
           )}
@@ -84,11 +107,18 @@ const ContractForm = ({ data, onRetry }: Props) => {
         <div>
           <p className="text-gray-400">Start Date</p>
           {isEditing ? (
-            <input
-              type="date"
-              {...register("start_date")}
-              className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
-            />
+            <div>
+              <input
+                type="date"
+                {...register("start_date", {
+                  required: "Start date is required"
+                })}
+                className="w-full bg-gray-700 text-white text-lg p-2 rounded mt-1"
+              />
+              {errors.start_date && (
+                <p className="text-red-500 text-sm mt-1">{errors.start_date.message}</p>
+              )}
+            </div>
           ) : (
             <p className="text-white text-lg">{contract.start_date}</p>
           )}
