@@ -20,6 +20,6 @@ export interface ContractData {
   status: string;
   type: string;
   notes: string;
-  original_final_name: string;
+  original_file_name: string;
   start_date: string;
 }

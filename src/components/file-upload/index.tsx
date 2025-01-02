@@ -42,7 +42,7 @@ const FileUpload = () => {
       fee_amount: 100000,
       start_date: "2024-03-20",
       work_for_hire: true,
-      original_final_name: file.name
+      original_file_name: file.name
     };
 
     setExtractedData(mockData);
@@ -58,6 +58,11 @@ const FileUpload = () => {
       }
     }
   })
+
+  const handleRetry = () => {
+    setExtractedData(null);
+    uppy.cancelAll();
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] p-4">
@@ -83,7 +88,10 @@ const FileUpload = () => {
       )}
 
       {extractedData && !isExtracting && (
-        <ContractForm />
+        <ContractForm 
+          data={extractedData}
+          onRetry={handleRetry}
+        />
       )}
     </div>
   );
